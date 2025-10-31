@@ -20,6 +20,7 @@ from sklearn.metrics import (
 )
 from sklearn.calibration import calibration_curve
 from scipy.sparse import vstack
+from scipy.stats import ttest_rel
 
 # Visualization settings
 plt.style.use('seaborn-v0_8-darkgrid')
@@ -481,11 +482,16 @@ rf_cv_scores = cross_val_score(
     cv=5, scoring='f1', n_jobs=-1
 )
 
+
 print(f"Random Forest:")
 print(f"  F1 Scores by fold: {[f'{score:.3f}' for score in rf_cv_scores]}")
 print(f"  Mean F1:  {rf_cv_scores.mean():.3f}")
 print(f"  Std Dev:  {rf_cv_scores.std():.3f}")
 print(f"  Range:    {rf_cv_scores.max() - rf_cv_scores.min():.3f}")
+
+# t-test
+t_stat, p_value = ttest_rel(rf_cv_scores, dt_cv_scores)
+print(f"Paired t-test: t={t_stat:.3f}, p={p_value:.4f}")
 
 # Visualization
 fig, ax = plt.subplots(figsize=(8, 6))
@@ -599,7 +605,7 @@ ax.legend(loc='lower right')
 ax.grid(axis='x', alpha=0.3)
 plt.tight_layout()
 plt.show()
-    
+
 
 '''
 MODEL COMPLEXITY AND EFFICIENCY ANALYSIS
