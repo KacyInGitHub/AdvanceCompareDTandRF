@@ -22,6 +22,7 @@ from sklearn.calibration import calibration_curve
 from scipy.sparse import vstack
 from scipy.stats import ttest_rel
 
+
 # Visualization settings
 plt.style.use('seaborn-v0_8-darkgrid')
 sns.set_palette("husl")
@@ -481,6 +482,7 @@ rf_cv_scores = cross_val_score(
     X_train_val_enc, y_train_val,
     cv=5, scoring='f1', n_jobs=-1
 )
+
 
 print(f"Random Forest:")
 print(f"  F1 Scores by fold: {[f'{score:.3f}' for score in rf_cv_scores]}")
