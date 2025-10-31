@@ -482,7 +482,6 @@ rf_cv_scores = cross_val_score(
     cv=5, scoring='f1', n_jobs=-1
 )
 
-
 print(f"Random Forest:")
 print(f"  F1 Scores by fold: {[f'{score:.3f}' for score in rf_cv_scores]}")
 print(f"  Mean F1:  {rf_cv_scores.mean():.3f}")
